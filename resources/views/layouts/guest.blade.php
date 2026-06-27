@@ -97,7 +97,7 @@
             </div>
 
             <!-- Glassmorphic Form Card -->
-            <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 p-8 rounded-3xl shadow-2xl">
+            <div class="bg-slate-900 md:bg-slate-900/60 md:backdrop-blur-md border border-slate-800 p-8 rounded-3xl shadow-2xl">
                 {{ $slot }}
             </div>
         </div>
