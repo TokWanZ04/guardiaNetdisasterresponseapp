@@ -36,6 +36,11 @@ class CitizenController extends Controller
             'type' => 'required|in:Medical,Fire,Flood',
         ]);
 
+        // Prevent spam: Check if user already has an active unresolved incident
+        if (auth()->user()->incidents()->where('status', '!=', 'Resolved')->exists()) {
+            return back()->with('error', 'You already have an active SOS dispatch! Please wait for responders to resolve it.');
+        }
+
         Incident::create([
             'user_id' => auth()->id(),
             'location' => $request->location,
@@ -44,6 +49,17 @@ class CitizenController extends Controller
         ]);
 
         return back()->with('success', 'SOS Alert sent successfully. Responders will be dispatched shortly.');
+    }
+
+    public function getActiveIncidentsHTML()
+    {
+        $activeIncidents = auth()->user()->incidents()
+            ->with(['responseLogs.responder'])
+            ->where('status', '!=', 'Resolved')
+            ->latest()
+            ->get();
+            
+        return view('citizen.partials.active-incidents', compact('activeIncidents'));
     }
 
     public function updateProfile(Request $request)
