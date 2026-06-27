@@ -135,5 +135,8 @@
                                         @endif
                                     </div>
                                 @endforeach
-                            </div>
                         @endif
+                    </div>
+                </div>
+
+                <div id="tracking-incidents-data" class="hidden" data-incidents='@json($activeIncidents->filter(function($inc) { return ($inc->status === "En Route" || $inc->status === "On Scene") && $inc->responseLogs->last() && $inc->responseLogs->last()->responder; })->map(function($inc) { return ["id" => $inc->id, "citizenCoords" => $inc->location, "responderName" => $inc->responseLogs->last()->responder->name]; })->values())'></div>

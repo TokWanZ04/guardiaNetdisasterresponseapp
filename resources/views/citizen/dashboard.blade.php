@@ -850,7 +850,29 @@
                     if(container) {
                         // Only replace if the HTML has changed to avoid unnecessary re-renders of the map
                         if(container.innerHTML !== html) {
+                            
+                            // Destroy old Leaflet maps to prevent memory leaks and ghost maps
+                            for (let id in trackingMaps) {
+                                if (trackingMaps[id]) {
+                                    trackingMaps[id].remove();
+                                }
+                                delete trackingMaps[id];
+                            }
+                            
                             container.innerHTML = html;
+                            
+                            // Re-initialize maps from the newly injected JSON data
+                            const dataEl = document.getElementById('tracking-incidents-data');
+                            if (dataEl) {
+                                try {
+                                    const incidents = JSON.parse(dataEl.getAttribute('data-incidents'));
+                                    incidents.forEach(inc => {
+                                        initializeCitizenTrackingMap(inc.id, inc.citizenCoords, inc.responderName);
+                                    });
+                                } catch (e) {
+                                    console.error('Failed to parse active incidents for map:', e);
+                                }
+                            }
                         }
                     }
                 })
