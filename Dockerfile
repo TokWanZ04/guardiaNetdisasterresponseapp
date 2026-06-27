@@ -23,8 +23,11 @@ COPY --chown=www-data:www-data . /var/www/html
 # Copy compiled frontend assets from node-builder
 COPY --from=node-builder --chown=www-data:www-data /app/public/build /var/www/html/public/build
 
-# Switch back to web user
+# Switch back to web user for composer install
 USER www-data
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
+
+# Switch back to root so s6-overlay can start correctly
+USER root
