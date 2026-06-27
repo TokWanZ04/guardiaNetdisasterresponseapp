@@ -1,0 +1,24 @@
+databases:
+  - name: disaster-response-db
+    databaseName: guardiannet
+    user: admin
+    plan: free
+
+services:
+  - type: web
+    name: disaster-response-app
+    runtime: docker
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: disaster-response-db
+          property: connectionString
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
