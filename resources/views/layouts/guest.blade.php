@@ -90,8 +90,8 @@
     </head>
     <body class="bg-slate-950 font-sans text-slate-100 antialiased selection:bg-red-500 selection:text-white min-h-screen relative overflow-x-hidden flex items-center justify-center py-12 px-6">
         <!-- Glowing Beacons in background -->
-        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full beacon-glow-red bg-red-600/5 blur-[120px] pointer-events-none"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full beacon-glow-blue bg-blue-600/5 blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full beacon-glow-red bg-red-600/5 blur-[120px] pointer-events-none hidden md:block"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full beacon-glow-blue bg-blue-600/5 blur-[120px] pointer-events-none hidden md:block"></div>
 
         <div class="w-full max-w-md relative z-10">
             <!-- Branding Header -->
