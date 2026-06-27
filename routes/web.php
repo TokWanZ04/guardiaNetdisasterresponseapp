@@ -18,6 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/setup-database', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--force' => true, '--seed' => true]);
+        return "Database migrations and seeding completed successfully! You can now log in.";
+    } catch (\Exception $e) {
+        return "Error running migrations: " . $e->getMessage();
+    }
+});
+
 use App\Http\Controllers\CitizenController;
 use App\Http\Controllers\ResponderController;
 use App\Http\Controllers\AdminController;
