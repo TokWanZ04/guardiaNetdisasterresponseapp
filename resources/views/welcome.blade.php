@@ -26,9 +26,9 @@
 
         <div class="max-w-7xl mx-auto px-6 py-8 relative z-10 flex flex-col min-h-screen justify-between">
             <!-- Header Nav -->
-            <header class="flex justify-between items-center pb-6 border-b border-slate-800/80">
+            <header class="flex flex-col sm:flex-row justify-between items-center pb-6 border-b border-slate-800/80 gap-4">
                 <div class="flex items-center space-x-3">
-                    <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center shadow-lg shadow-red-500/20 font-extrabold text-white text-lg">
+                    <div class="h-10 w-10 shrink-0 rounded-xl bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center shadow-lg shadow-red-500/20 font-extrabold text-white text-lg">
                         🛡️
                     </div>
                     <div>
