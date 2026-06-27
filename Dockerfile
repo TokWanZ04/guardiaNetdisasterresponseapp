@@ -11,6 +11,9 @@ FROM serversideup/php:8.2-fpm-nginx
 ENV WEB_DOCUMENT_ROOT=/var/www/html/public
 ENV PHP_OPCACHE_ENABLE=1
 
+# Tell Render what port the serversideup image uses
+EXPOSE 8080
+
 # Switch to root to copy files with correct permissions
 USER root
 
