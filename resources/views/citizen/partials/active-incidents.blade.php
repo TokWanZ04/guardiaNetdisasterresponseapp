@@ -139,4 +139,10 @@
                     </div>
                 </div>
 
-                <div id="tracking-incidents-data" class="hidden" data-incidents='@json($activeIncidents->filter(function($inc) { return ($inc->status === "En Route" || $inc->status === "On Scene") && $inc->responseLogs->last() && $inc->responseLogs->last()->responder; })->map(function($inc) { return ["id" => $inc->id, "citizenCoords" => $inc->location, "responderName" => $inc->responseLogs->last()->responder->name]; })->values())'></div>
+                @php
+                    $stateHash = md5($activeIncidents->map(function($inc) {
+                        $responderId = $inc->responseLogs->last() ? $inc->responseLogs->last()->responder_id : 'none';
+                        return $inc->id . '-' . $inc->status . '-' . $responderId;
+                    })->join('|'));
+                @endphp
+                <div id="tracking-incidents-data" class="hidden" data-state="{{ $stateHash }}" data-incidents='@json($activeIncidents->filter(function($inc) { return ($inc->status === "En Route" || $inc->status === "On Scene") && $inc->responseLogs->last() && $inc->responseLogs->last()->responder; })->map(function($inc) { return ["id" => $inc->id, "citizenCoords" => $inc->location, "responderName" => $inc->responseLogs->last()->responder->name]; })->values())'></div>

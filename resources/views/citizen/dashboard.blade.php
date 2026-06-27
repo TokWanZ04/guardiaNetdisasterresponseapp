@@ -848,9 +848,25 @@
                 .then(html => {
                     const container = document.getElementById('active-incidents-container');
                     if(container) {
-                        // Only replace if the HTML has changed to avoid unnecessary re-renders of the map
-                        if(container.innerHTML !== html) {
-                            
+                        // Parse the new HTML to check the state hash
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = html;
+                        const newDataEl = tempDiv.querySelector('#tracking-incidents-data');
+                        const currentDataEl = document.getElementById('tracking-incidents-data');
+                        
+                        let shouldUpdate = false;
+                        
+                        if (newDataEl && currentDataEl) {
+                            // Only update if the core status has changed!
+                            if (newDataEl.getAttribute('data-state') !== currentDataEl.getAttribute('data-state')) {
+                                shouldUpdate = true;
+                            }
+                        } else if (newDataEl || currentDataEl) {
+                            // One exists but the other doesn't (e.g., went from 0 incidents to 1)
+                            shouldUpdate = true;
+                        }
+                        
+                        if(shouldUpdate) {
                             // Destroy old Leaflet maps to prevent memory leaks and ghost maps
                             for (let id in trackingMaps) {
                                 if (trackingMaps[id]) {
