@@ -41,7 +41,7 @@
             <div class="lg:col-span-1 space-y-8">
                 
                 <!-- Broadcast Card -->
-                <div class="bg-slate-900/60 backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 transition duration-300 hover:border-red-500/30">
+                <div class="bg-slate-900/60 md:backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 transition duration-300 hover:border-red-500/30">
                     <div class="p-6 relative overflow-hidden">
                         <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-red-600/10 rounded-full blur-xl pointer-events-none"></div>
 
@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- Recent Alerts -->
-                <div class="bg-slate-900/60 backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden">
+                <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden">
                     <div class="p-6 border-b border-slate-800 bg-slate-800/30">
                         <h3 class="text-base font-bold text-white">Recent Broadcasts</h3>
                     </div>
@@ -95,7 +95,7 @@
 
             <!-- Right Column: Incident Data (Span 2) -->
             <div class="lg:col-span-2">
-                <div class="bg-slate-900/60 backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden h-full">
+                <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden h-full">
                     <div class="p-6 border-b border-slate-800 bg-slate-800/30 flex items-center justify-between">
                         <h3 class="text-lg font-bold text-white">Global Incident Management Grid</h3>
                         <span class="text-xs font-bold text-slate-500">Real-Time Data Feed</span>
@@ -172,7 +172,7 @@
                             <!-- Mobile Cards List (block lg:hidden) -->
                             <div class="block lg:hidden space-y-4 mt-4 text-left">
                                 @foreach($incidents as $incident)
-                                    <div class="bg-slate-950/60 backdrop-blur-md border border-slate-850 rounded-2xl p-5 space-y-4 hover:border-red-500/30 transition duration-150 relative overflow-hidden">
+                                    <div class="bg-slate-950/60 md:backdrop-blur-md border border-slate-850 rounded-2xl p-5 space-y-4 hover:border-red-500/30 transition duration-150 relative overflow-hidden">
                                         <!-- Top row: Nature Badge & Status -->
                                         <div class="flex items-center justify-between border-b border-slate-850 pb-3">
                                             <div class="flex items-center space-x-2">
@@ -248,7 +248,7 @@
                 <!-- Left Column: Registration Card -->
                 <div class="lg:col-span-1 space-y-8">
                     <!-- Add Responder Card -->
-                    <div class="bg-slate-900/60 backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 transition duration-300 hover:border-blue-500/30">
+                    <div class="bg-slate-900/60 md:backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 transition duration-300 hover:border-blue-500/30">
                         <div class="p-6 relative overflow-hidden">
                             <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-blue-600/10 rounded-full blur-xl pointer-events-none"></div>
 
@@ -288,7 +288,7 @@
 
                 <!-- Right Column: Responder Roster -->
                 <div class="lg:col-span-2">
-                    <div class="bg-slate-900/60 backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden h-full">
+                    <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden h-full">
                         <div class="p-6 border-b border-slate-800 bg-slate-800/30 flex items-center justify-between">
                             <h3 class="text-lg font-bold text-white flex items-center">
                                 <span class="text-blue-500 mr-2">📋</span>
@@ -350,7 +350,7 @@
                                 <!-- Mobile Cards List (block lg:hidden) -->
                                 <div class="block lg:hidden space-y-4 mt-4 text-left">
                                     @foreach($responders as $resp)
-                                        <div class="bg-slate-950/60 backdrop-blur-md border border-slate-850 rounded-2xl p-5 space-y-4 hover:border-blue-500/30 transition duration-150 relative overflow-hidden">
+                                        <div class="bg-slate-950/60 md:backdrop-blur-md border border-slate-850 rounded-2xl p-5 space-y-4 hover:border-blue-500/30 transition duration-150 relative overflow-hidden">
                                             <!-- Top Row: Name & Status Icon -->
                                             <div class="flex items-center justify-between border-b border-slate-850 pb-3">
                                                 <div class="flex items-center space-x-2 text-sm font-extrabold text-white">

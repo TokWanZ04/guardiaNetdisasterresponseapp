@@ -27,7 +27,7 @@
             </div>
         @endif
 
-        <div class="bg-slate-900/60 backdrop-blur-md border border-slate-800 rounded-3xl shadow-2xl overflow-hidden">
+        <div class="bg-slate-900/60 md:backdrop-blur-md border border-slate-800 rounded-3xl shadow-2xl overflow-hidden">
             <div class="p-8 text-slate-100">
                 <div class="flex items-center justify-between pb-6 border-b border-slate-850">
                     <div>
@@ -253,7 +253,7 @@
                         <!-- Mobile Cards List (block lg:hidden) -->
                         <div class="block lg:hidden space-y-4 mt-4 text-left">
                             @foreach($incidents as $incident)
-                                <div class="bg-slate-900/60 backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-5 space-y-4 hover:border-indigo-500/30 transition duration-300">
+                                <div class="bg-slate-900/60 md:backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-5 space-y-4 hover:border-indigo-500/30 transition duration-300">
                                     <!-- Top row: ID, Type, and Status -->
                                     <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                                         <div class="flex items-center space-x-2">

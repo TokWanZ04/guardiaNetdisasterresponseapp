@@ -60,8 +60,8 @@
     </head>
     <body class="font-sans antialiased bg-slate-950 text-slate-100 min-h-screen relative overflow-x-hidden">
         <!-- Glowing Beacons in background -->
-        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full beacon-glow-red bg-red-600/5 blur-[120px] pointer-events-none"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full beacon-glow-blue bg-blue-600/5 blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full beacon-glow-red bg-red-600/5 blur-[120px] pointer-events-none hidden md:block"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full beacon-glow-blue bg-blue-600/5 blur-[120px] pointer-events-none hidden md:block"></div>
 
         <!-- Dashboard Wrapper -->
         <div class="min-h-screen flex flex-col lg:flex-row relative z-10" x-data="{ sidebarOpen: false }">
@@ -71,7 +71,7 @@
             <!-- Main Content Area -->
             <div class="flex-1 flex flex-col min-w-0 min-h-screen lg:pl-20">
                 <!-- Mobile Header Top-Bar -->
-                <div class="lg:hidden bg-slate-900/80 border-b border-slate-800 backdrop-blur-md py-4 px-6 flex items-center justify-between sticky top-0 z-30">
+                <div class="lg:hidden bg-slate-900/80 border-b border-slate-800 md:backdrop-blur-md py-4 px-6 flex items-center justify-between sticky top-0 z-30">
                     <a href="{{ Auth::user()->role_type === 'Citizen' ? route('citizen.dashboard') : route('dashboard') }}" class="flex items-center space-x-2">
                         <div class="h-8 w-8 rounded-lg bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center font-bold text-white text-sm">
                             🛡️
@@ -90,7 +90,7 @@
 
                 <!-- Page Heading -->
                 @if (isset($header))
-                    <header class="bg-slate-900/40 border-b border-slate-800/80 backdrop-blur-md py-6 px-6 sm:px-8">
+                    <header class="bg-slate-900/40 border-b border-slate-800/80 md:backdrop-blur-md py-6 px-6 sm:px-8">
                         <div class="max-w-7xl mx-auto">
                             {{ $header }}
                         </div>

@@ -1,5 +1,5 @@
 <!-- Sidebar Container -->
-<div :class="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}" class="group fixed inset-y-0 left-0 w-72 lg:w-20 lg:hover:w-72 bg-slate-950 border-r border-slate-900/80 backdrop-blur-xl z-50 flex flex-col justify-between transition-all duration-300 ease-in-out -translate-x-full lg:translate-x-0 select-none shadow-2xl hover:shadow-black/80">
+<div :class="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}" class="group fixed inset-y-0 left-0 w-72 lg:w-20 lg:hover:w-72 bg-slate-950 border-r border-slate-900/80 md:backdrop-blur-xl z-50 flex flex-col justify-between transition-all duration-300 ease-in-out -translate-x-full lg:translate-x-0 select-none shadow-2xl hover:shadow-black/80">
     
     <!-- Top Brand & Navigation Block -->
     <div>
@@ -112,4 +112,4 @@
 </div>
 
 <!-- Mobile Drawer Overlay Background -->
-<div x-show="sidebarOpen" style="display: none;" @click="sidebarOpen = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black/60 z-40 lg:hidden backdrop-blur-sm"></div>
+<div x-show="sidebarOpen" style="display: none;" @click="sidebarOpen = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black/60 z-40 lg:hidden md:backdrop-blur-sm"></div>

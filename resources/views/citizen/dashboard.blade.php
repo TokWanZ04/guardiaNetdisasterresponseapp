@@ -30,7 +30,7 @@
             </div>
             @endif
 
-            <span class="text-sm font-normal text-slate-400 bg-slate-900/60 backdrop-blur-md px-3 py-1 rounded-full border border-slate-700 shrink-0 self-center">
+            <span class="text-sm font-normal text-slate-400 bg-slate-900/60 md:backdrop-blur-md px-3 py-1 rounded-full border border-slate-700 shrink-0 self-center">
                 Logged in as: <strong class="text-white">{{ auth()->user()->name }}</strong>
             </span>
         </h2>
@@ -76,7 +76,7 @@
                 <div class="lg:col-span-2 space-y-8">
 
                     <!-- Advanced SOS Panel -->
-                <div class="bg-slate-900/60 backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 transition duration-300 hover:border-red-500/30">
+                <div class="bg-slate-900/60 md:backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 transition duration-300 hover:border-red-500/30">
                     <div class="p-8 text-center relative overflow-hidden">
                         <!-- Premium Background Decorative Element -->
                         <div class="absolute top-0 right-0 -mt-12 -mr-12 w-48 h-48 bg-red-600/10 rounded-full blur-2xl pointer-events-none"></div>
@@ -126,7 +126,7 @@
                 </div>
 
                 <!-- Live SOS Dispatch Tracking -->
-                <div class="bg-slate-900/60 backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden">
+                <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden">
                     <div class="p-6 border-b border-slate-800 bg-slate-800/30 flex items-center justify-between">
                         <h3 class="text-lg font-bold text-white flex items-center">
                             <svg class="h-5 w-5 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -249,7 +249,7 @@
                                                         <span id="chat-toggle-text-{{ $incident->id }}">Open Live Emergency Chat</span>
                                                     </button>
                                                     
-                                                    <div id="chat-box-{{ $incident->id }}" class="hidden mt-3 border border-slate-700 rounded-xl bg-slate-900/80 overflow-hidden shadow-sm backdrop-blur-md">
+                                                    <div id="chat-box-{{ $incident->id }}" class="hidden mt-3 border border-slate-700 rounded-xl bg-slate-900/80 overflow-hidden shadow-sm md:backdrop-blur-md">
                                                         <div class="p-3 bg-slate-800 border-b border-slate-700 text-white flex justify-between items-center">
                                                             <span class="text-[10px] font-extrabold tracking-wide uppercase flex items-center text-slate-300">
                                                                 <span class="relative flex h-2 w-2 mr-2">
@@ -283,7 +283,7 @@
 
             <!-- Right Column: Premium Emergency Profile (Span 1) -->
             <div class="lg:col-span-1">
-                <div class="bg-slate-900/60 backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden sticky top-8 transition duration-300 hover:border-slate-700">
+                <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden sticky top-8 transition duration-300 hover:border-slate-700">
                     
                     <!-- Header with dynamic styling -->
                     <div class="bg-gradient-to-br from-slate-800 to-slate-900 border-b border-slate-700/80 p-6 relative">
@@ -379,7 +379,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Main Form Card (Span 2) -->
             <div class="lg:col-span-2 space-y-8">
-                <div class="bg-slate-900/60 backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-8">
+                <div class="bg-slate-900/60 md:backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-8">
                     <div class="flex items-center space-x-3 mb-6 pb-4 border-b border-slate-850">
                         <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center font-bold text-white text-lg">
                             🩺
@@ -446,7 +446,7 @@
 
             <!-- Side Card (Span 1) -->
             <div class="lg:col-span-1">
-                <div class="bg-slate-900/60 backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-6 space-y-6">
+                <div class="bg-slate-900/60 md:backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-6 space-y-6">
                     <h3 class="text-base font-black text-white uppercase tracking-wider flex items-center">
                         🛡️ Secure Data Node
                     </h3>
@@ -470,7 +470,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- History Card List (Span 2) -->
             <div class="lg:col-span-2 space-y-8">
-                <div class="bg-slate-900/60 backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden">
+                <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden">
                     <div class="p-6 border-b border-slate-800 bg-slate-800/30 flex items-center justify-between">
                         <h3 class="text-base font-extrabold text-slate-200 flex items-center uppercase tracking-wider">
                             <svg class="h-5 w-5 mr-2 text-slate-450" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -529,7 +529,7 @@
 
             <!-- Stats Column (Span 1) -->
             <div class="lg:col-span-1">
-                <div class="bg-slate-900/60 backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-6 space-y-6">
+                <div class="bg-slate-900/60 md:backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-6 space-y-6">
                     <h3 class="text-base font-black text-white uppercase tracking-wider flex items-center">
                         📊 Operations Stats
                     </h3>
@@ -554,7 +554,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Manual Content Panel (Span 2) -->
             <div class="lg:col-span-2 space-y-8">
-                <div class="bg-slate-900/60 backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden">
+                <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden">
                     <div class="p-6 border-b border-slate-800 bg-slate-800/30 flex items-center justify-between">
                         <h3 class="text-base font-extrabold text-white flex items-center uppercase tracking-wider">
                             <svg class="h-5 w-5 mr-3 text-red-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -624,7 +624,7 @@
             <!-- Stats Column (Span 1) -->
             <div class="lg:col-span-1 space-y-6">
                 <!-- Emergency Hotlines widget -->
-                <div class="bg-slate-900/60 backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-6 space-y-6">
+                <div class="bg-slate-900/60 md:backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-6 space-y-6">
                     <h3 class="text-base font-black text-white uppercase tracking-wider flex items-center">
                         📞 Crisis Hotlines
                     </h3>
@@ -654,7 +654,7 @@
                 </div>
 
                 <!-- Offline Cache Widget -->
-                <div class="bg-slate-900/60 backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-6 space-y-4">
+                <div class="bg-slate-900/60 md:backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 p-6 space-y-4">
                     <h4 class="text-xs font-black text-amber-500 uppercase tracking-widest flex items-center">
                         💾 Offline Local Storage
                     </h4>
