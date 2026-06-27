@@ -49,6 +49,7 @@ Route::middleware(['auth', 'role:Citizen'])->group(function () {
 // Responder Routes
 Route::middleware(['auth', 'role:Responder'])->group(function () {
     Route::get('/responder', [ResponderController::class, 'index'])->name('responder.dashboard');
+    Route::get('/responder/active-incidents', [ResponderController::class, 'getActiveIncidentsHTML'])->name('responder.active.incidents');
     Route::post('/responder/status/{incident}', [ResponderController::class, 'updateStatus'])->name('responder.status');
 });
 

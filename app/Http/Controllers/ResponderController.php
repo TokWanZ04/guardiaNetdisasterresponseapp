@@ -15,6 +15,12 @@ class ResponderController extends Controller
         return view('responder.dashboard', compact('incidents'));
     }
 
+    public function getActiveIncidentsHTML()
+    {
+        $incidents = Incident::with('user')->whereIn('status', ['Pending', 'En Route', 'On Scene'])->latest()->get();
+        return view('responder.partials.active-incidents', compact('incidents'));
+    }
+
     public function updateStatus(Request $request, Incident $incident)
     {
         $request->validate([
