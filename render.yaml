@@ -19,9 +19,9 @@ services:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
-        value: false
+        value: "true"
       - key: APP_KEY
-        generateValue: true
+        value: "base64:O/C0hfdz0cxXXr9f5La0LJ1Y2AgTBtFzdlQW38Ux2Lk="
       - key: AUTORUN_ENABLED
         value: "true"
       - key: AUTORUN_LARAVEL_MIGRATION
