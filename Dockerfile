@@ -28,6 +28,3 @@ USER www-data
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
-
-# Switch back to root so s6-overlay can start correctly
-USER root
