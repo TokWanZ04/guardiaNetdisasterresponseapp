@@ -22,3 +22,11 @@ services:
         value: false
       - key: APP_KEY
         generateValue: true
+      - key: AUTORUN_ENABLED
+        value: "true"
+      - key: AUTORUN_LARAVEL_MIGRATION
+        value: "true"
+      - key: AUTORUN_LARAVEL_MIGRATION_MODE
+        value: "fresh"
+      - key: AUTORUN_LARAVEL_MIGRATION_SEED
+        value: "true"
