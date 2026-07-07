@@ -29,10 +29,15 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <div class="relative">
+                <x-text-input id="password" class="block mt-1 w-full pr-10"
+                                type="password"
+                                name="password"
+                                required autocomplete="new-password" />
+                <button type="button" onclick="togglePasswordVisibility('password', this)" class="absolute right-3 top-1/2 -translate-y-[30%] text-slate-400 hover:text-white transition duration-150 focus:outline-none text-sm">
+                    👁️
+                </button>
+            </div>
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -41,12 +46,30 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+            <div class="relative">
+                <x-text-input id="password_confirmation" class="block mt-1 w-full pr-10"
+                                type="password"
+                                name="password_confirmation" required autocomplete="new-password" />
+                <button type="button" onclick="togglePasswordVisibility('password_confirmation', this)" class="absolute right-3 top-1/2 -translate-y-[30%] text-slate-400 hover:text-white transition duration-150 focus:outline-none text-sm">
+                    👁️
+                </button>
+            </div>
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
+
+        <script>
+            function togglePasswordVisibility(inputId, button) {
+                const input = document.getElementById(inputId);
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    button.innerText = '🙈';
+                } else {
+                    input.type = 'password';
+                    button.innerText = '👁️';
+                }
+            }
+        </script>
 
         <div class="flex flex-col sm:flex-row items-center justify-end mt-8 gap-4">
             <div class="flex items-center space-x-3 w-full sm:w-auto">
