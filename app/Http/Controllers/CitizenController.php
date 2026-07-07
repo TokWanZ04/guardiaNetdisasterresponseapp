@@ -77,4 +77,37 @@ class CitizenController extends Controller
 
         return back()->with('success', 'Medical profile updated successfully.');
     }
+
+    public function getWeatherAlerts()
+    {
+        try {
+            $response = \Illuminate\Support\Facades\Http::timeout(3)->get('https://api.data.gov.my/weather/warning');
+            if ($response->successful()) {
+                $warnings = $response->json();
+
+                // Filter out empty advisories (e.g. "No Advisory")
+                $activeWarnings = array_filter($warnings, function($w) {
+                    return isset($w['heading_en']) && $w['heading_en'] !== 'No Advisory';
+                });
+
+                return response()->json([
+                    'success' => true,
+                    'warnings' => array_values(array_map(function($w) {
+                        return [
+                            'title' => $w['title_en'] ?? $w['heading_en'] ?? 'Weather Alert',
+                            'title_bm' => $w['title_bm'] ?? $w['heading_bm'] ?? 'Amaran Cuaca',
+                            'text' => $w['text_en'] ?? '',
+                            'text_bm' => $w['text_bm'] ?? '',
+                            'valid_to' => isset($w['valid_to']) ? date('d M Y, h:i A', strtotime($w['valid_to'])) : 'N/A',
+                            'issued' => isset($w['warning_issue']['issued']) ? date('d M Y, h:i A', strtotime($w['warning_issue']['issued'])) : 'N/A'
+                        ];
+                    }, array_slice($activeWarnings, 0, 3)))
+                ]);
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Weather API Error: ' . $e->getMessage());
+        }
+
+        return response()->json(['success' => false, 'warnings' => []]);
+    }
 }

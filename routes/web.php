@@ -42,6 +42,7 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'role:Citizen'])->group(function () {
     Route::get('/citizen', [CitizenController::class, 'index'])->name('citizen.dashboard');
     Route::get('/citizen/active-incidents', [CitizenController::class, 'getActiveIncidentsHTML'])->name('citizen.active.incidents');
+    Route::get('/citizen/weather-alerts', [CitizenController::class, 'getWeatherAlerts'])->name('citizen.weather.alerts');
     Route::post('/citizen/sos', [CitizenController::class, 'storeSOS'])->name('citizen.sos');
     Route::post('/citizen/profile', [CitizenController::class, 'updateProfile'])->name('citizen.profile.update');
 });

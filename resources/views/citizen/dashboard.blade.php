@@ -155,8 +155,8 @@
             </div>
 
             <!-- Right Column: Premium Emergency Profile (Span 1) -->
-            <div class="lg:col-span-1">
-                <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden sticky top-8 transition duration-300 hover:border-slate-700">
+            <div class="lg:col-span-1 space-y-8 sticky top-8">
+                <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden transition duration-300 hover:border-slate-700">
                     
                     <!-- Header with dynamic styling -->
                     <div class="bg-gradient-to-br from-slate-800 to-slate-900 border-b border-slate-700/80 p-6 relative">
@@ -243,6 +243,31 @@
                             @endif
                         </div>
 
+                    </div>
+                </div>
+
+                <!-- Live MET Malaysia Weather Alert Widget -->
+                <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden transition duration-300 hover:border-slate-700">
+                    <div class="bg-gradient-to-br from-slate-800 to-slate-900 border-b border-slate-700/80 p-6 relative">
+                        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm z-0 pointer-events-none"></div>
+                        <div class="relative z-10 flex items-center justify-between">
+                            <h3 class="text-sm font-extrabold flex items-center text-white tracking-wider uppercase">
+                                🇲🇾 MET Malaysia Live Alerts
+                            </h3>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 animate-pulse">
+                                Live Feed
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-slate-900/40 space-y-4" id="weather-alerts-container">
+                        <!-- Loading State -->
+                        <div class="flex items-center justify-center py-6 text-slate-500 text-xs italic space-x-2">
+                            <svg class="animate-spin h-4 w-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span>Synchronizing warnings with MET Malaysia...</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -540,6 +565,61 @@
     @endif
 
     <script>
+        // Fetch MET Malaysia weather warnings
+        function fetchWeatherAlerts() {
+            fetch('{{ route("citizen.weather.alerts") }}')
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById('weather-alerts-container');
+                    if (!container) return;
+
+                    if (data.success && data.warnings.length > 0) {
+                        let html = '';
+                        data.warnings.forEach(w => {
+                            html += `
+                                <div class="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 space-y-2 hover:bg-amber-500/10 transition duration-300">
+                                    <div class="flex justify-between items-start">
+                                        <h4 class="text-xs font-black text-amber-400 uppercase tracking-wide leading-tight">${w.title}</h4>
+                                    </div>
+                                    <p class="text-[10px] text-slate-300 font-medium leading-relaxed">${w.text}</p>
+                                    <div class="pt-1 flex items-center justify-between text-[8px] text-slate-500 font-bold border-t border-slate-800/60">
+                                        <span>ISSUED: ${w.issued}</span>
+                                        <span class="text-amber-500/65">UNTIL: ${w.valid_to}</span>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        container.innerHTML = html;
+                    } else {
+                        container.innerHTML = `
+                            <div class="text-center py-6">
+                                <div class="bg-slate-850 h-10 w-10 rounded-full flex items-center justify-center mx-auto mb-3 border border-slate-800 text-emerald-400">
+                                    ✓
+                                </div>
+                                <p class="text-[11px] font-extrabold text-slate-300 uppercase tracking-wider">All Grids Secure</p>
+                                <p class="text-[10px] text-slate-500 mt-1">No active weather warnings issued by MET Malaysia.</p>
+                            </div>
+                        `;
+                    }
+                })
+                .catch(err => {
+                    console.error('Weather alert fetch error:', err);
+                    const container = document.getElementById('weather-alerts-container');
+                    if (container) {
+                        container.innerHTML = `
+                            <div class="text-center py-6 text-slate-500 text-[10px]">
+                                <span>Failed to synchronize weather feeds.</span>
+                            </div>
+                        `;
+                    }
+                });
+        }
+
+        // Run on load
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchWeatherAlerts();
+        });
+
         // Simple geolocation simulation for the purpose of the project
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
