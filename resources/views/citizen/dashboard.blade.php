@@ -70,15 +70,15 @@
             </div>
         @endif
 
-        <!-- Live MET Malaysia Weather Alert Banner -->
-        <div id="weather-banner-container" class="hidden mb-8">
-            <!-- Dynamic Content Injected Here -->
-        </div>
-
         @if ($tab === 'home')
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Left Column: SOS & Announcements (Span 2) -->
                 <div class="lg:col-span-2 space-y-8">
+
+                    <!-- Live MET Malaysia Weather Alert Banner -->
+                    <div id="weather-banner-container" class="hidden">
+                        <!-- Dynamic Content Injected Here -->
+                    </div>
 
                     <!-- Advanced SOS Panel -->
                 <div class="bg-slate-900/60 md:backdrop-blur-md overflow-hidden shadow-2xl rounded-3xl border border-slate-800 transition duration-300 hover:border-red-500/30">
@@ -598,7 +598,25 @@
                         bannerContainer.innerHTML = html;
                         bannerContainer.classList.remove('hidden');
                     } else {
-                        bannerContainer.classList.add('hidden');
+                        // Safe State: Instead of hiding completely, show a clean, green MET Malaysia All Clear alert
+                        bannerContainer.innerHTML = `
+                            <div class="bg-gradient-to-r from-emerald-950/30 via-slate-900/40 to-slate-900/60 border border-emerald-500/20 p-4 rounded-3xl shadow-xl relative overflow-hidden backdrop-blur-md">
+                                <div class="absolute inset-y-0 left-0 w-1 bg-emerald-500"></div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2.5">
+                                        <span class="text-emerald-400 text-sm">✓</span>
+                                        <div>
+                                            <h4 class="text-xs font-black text-emerald-400 uppercase tracking-widest">🇲🇾 MET Malaysia Live Feed</h4>
+                                            <p class="text-[10px] text-slate-400 mt-0.5 font-semibold">All local weather grids are currently secure. No active natural disaster warnings.</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-[8px] font-black uppercase text-slate-500 bg-slate-950 px-2 py-0.5 rounded-full border border-slate-800">
+                                        All Clear
+                                    </span>
+                                </div>
+                            </div>
+                        `;
+                        bannerContainer.classList.remove('hidden');
                     }
                 })
                 .catch(err => {
