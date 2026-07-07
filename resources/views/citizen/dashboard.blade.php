@@ -70,6 +70,11 @@
             </div>
         @endif
 
+        <!-- Live MET Malaysia Weather Alert Banner -->
+        <div id="weather-banner-container" class="hidden mb-8">
+            <!-- Dynamic Content Injected Here -->
+        </div>
+
         @if ($tab === 'home')
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Left Column: SOS & Announcements (Span 2) -->
@@ -243,31 +248,6 @@
                             @endif
                         </div>
 
-                    </div>
-                </div>
-
-                <!-- Live MET Malaysia Weather Alert Widget -->
-                <div class="bg-slate-900/60 md:backdrop-blur-md shadow-2xl rounded-3xl border border-slate-800 overflow-hidden transition duration-300 hover:border-slate-700">
-                    <div class="bg-gradient-to-br from-slate-800 to-slate-900 border-b border-slate-700/80 p-6 relative">
-                        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm z-0 pointer-events-none"></div>
-                        <div class="relative z-10 flex items-center justify-between">
-                            <h3 class="text-sm font-extrabold flex items-center text-white tracking-wider uppercase">
-                                🇲🇾 MET Malaysia Live Alerts
-                            </h3>
-                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 animate-pulse">
-                                Live Feed
-                            </span>
-                        </div>
-                    </div>
-                    <div class="p-6 bg-slate-900/40 space-y-4" id="weather-alerts-container">
-                        <!-- Loading State -->
-                        <div class="flex items-center justify-center py-6 text-slate-500 text-xs italic space-x-2">
-                            <svg class="animate-spin h-4 w-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            <span>Synchronizing warnings with MET Malaysia...</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -570,48 +550,59 @@
             fetch('{{ route("citizen.weather.alerts") }}')
                 .then(res => res.json())
                 .then(data => {
-                    const container = document.getElementById('weather-alerts-container');
-                    if (!container) return;
+                    const bannerContainer = document.getElementById('weather-banner-container');
+                    if (!bannerContainer) return;
 
                     if (data.success && data.warnings.length > 0) {
-                        let html = '';
+                        let html = `
+                            <div class="bg-gradient-to-r from-red-950/40 via-amber-950/40 to-slate-900/60 border border-red-500/20 p-5 rounded-3xl shadow-2xl relative overflow-hidden backdrop-blur-md transition duration-300 hover:border-red-500/40">
+                                <!-- Glowing Border/Animation effect -->
+                                <div class="absolute inset-y-0 left-0 w-1 bg-red-500 animate-pulse"></div>
+                                <div class="absolute top-0 right-0 -mt-12 -mr-12 w-32 h-32 bg-red-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                                
+                                <div class="flex items-center space-x-3 mb-3 border-b border-slate-800/80 pb-2.5">
+                                    <span class="flex h-2.5 w-2.5 relative">
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                                    </span>
+                                    <h3 class="text-xs font-black text-red-400 uppercase tracking-widest flex items-center">
+                                        🇲🇾 MET Malaysia Live Warnings
+                                    </h3>
+                                </div>
+                                <div class="space-y-4">
+                        `;
+                        
                         data.warnings.forEach(w => {
                             html += `
-                                <div class="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 space-y-2 hover:bg-amber-500/10 transition duration-300">
-                                    <div class="flex justify-between items-start">
-                                        <h4 class="text-xs font-black text-amber-400 uppercase tracking-wide leading-tight">${w.title}</h4>
+                                    <div class="text-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                                        <div class="flex-1">
+                                            <div class="flex items-center space-x-2">
+                                                <span class="text-amber-500 text-xs">⚠️</span>
+                                                <h4 class="text-xs font-extrabold text-amber-400 uppercase tracking-wider">${w.title}</h4>
+                                            </div>
+                                            <p class="text-[11px] text-slate-300 mt-1 font-medium leading-relaxed">${w.text}</p>
+                                        </div>
+                                        <div class="text-left md:text-right shrink-0">
+                                            <span class="inline-block bg-slate-950/60 border border-slate-800 rounded-lg px-2.5 py-1 text-[8px] font-bold text-slate-400">
+                                                VALID UNTIL: ${w.valid_to}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <p class="text-[10px] text-slate-300 font-medium leading-relaxed">${w.text}</p>
-                                    <div class="pt-1 flex items-center justify-between text-[8px] text-slate-500 font-bold border-t border-slate-800/60">
-                                        <span>ISSUED: ${w.issued}</span>
-                                        <span class="text-amber-500/65">UNTIL: ${w.valid_to}</span>
-                                    </div>
-                                </div>
                             `;
                         });
-                        container.innerHTML = html;
-                    } else {
-                        container.innerHTML = `
-                            <div class="text-center py-6">
-                                <div class="bg-slate-850 h-10 w-10 rounded-full flex items-center justify-center mx-auto mb-3 border border-slate-800 text-emerald-400">
-                                    ✓
+
+                        html += `
                                 </div>
-                                <p class="text-[11px] font-extrabold text-slate-300 uppercase tracking-wider">All Grids Secure</p>
-                                <p class="text-[10px] text-slate-500 mt-1">No active weather warnings issued by MET Malaysia.</p>
                             </div>
                         `;
+                        bannerContainer.innerHTML = html;
+                        bannerContainer.classList.remove('hidden');
+                    } else {
+                        bannerContainer.classList.add('hidden');
                     }
                 })
                 .catch(err => {
                     console.error('Weather alert fetch error:', err);
-                    const container = document.getElementById('weather-alerts-container');
-                    if (container) {
-                        container.innerHTML = `
-                            <div class="text-center py-6 text-slate-500 text-[10px]">
-                                <span>Failed to synchronize weather feeds.</span>
-                            </div>
-                        `;
-                    }
                 });
         }
 
