@@ -78,6 +78,10 @@ class CitizenController extends Controller
         return back()->with('success', 'Medical profile updated successfully.');
     }
 
+    /**
+     * Fetch active weather warnings dynamically from the official MET Malaysia API
+     * (api.data.gov.my) to render on the citizen's dashboard.
+     */
     public function getWeatherAlerts()
     {
         try {
